@@ -6,9 +6,9 @@ Wants=network-online.target
 TimeoutStartSec=0
 ExecStartPre=-/bin/podman kill velocity
 ExecStartPre=-/bin/podman rm velocity
-ExecStartPre=/bin/rm -r /repo/path
-ExecStartPre=/bin/git clone REPOURL
-ExecStart=/repo/path/start.sh
+ExecStartPre=/bin/rm -r /work/repos/velocity-docker/
+ExecStartPre=/bin/git clone https://github.com/MCWertGaming/velocity-docker.git /work/repos/velocity-docker/
+ExecStart=/work/repos/velocity-docker/start.sh
 ExecStop=/bin/podman stop velocity \
          /bin/podman rm velocity
 [Install]
