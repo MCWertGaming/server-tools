@@ -1,0 +1,15 @@
+[Unit]
+Description=Velocity
+After=network-online.target
+Wants=network-online.target
+[Service]
+TimeoutStartSec=0
+ExecStartPre=-/bin/podman kill velocity
+ExecStartPre=-/bin/podman rm velocity
+ExecStartPre=/bin/rm -r /repo/path
+ExecStartPre=/bin/git clone REPOURL
+ExecStart=/repo/path/start.sh
+ExecStop=/bin/podman stop velocity \
+         /bin/podman rm velocity
+[Install]
+WantedBy=multi-user.target
