@@ -80,11 +80,32 @@ systemctl enable nexus-updater.service
 systemctl enable nginx
 # place certificate
 cd /etc/nginx
-# wget <url to cert> > /etc/nginx/cert.crt
-# wget <url to key> > /etc/nginx/cert.key
-# or use selfsigned certificate
+
+# mount cert nfs folder
+mount 10.10.11.5:/mnt/nfs_share/nexus-cert /mnt
+
+# prepare openssl for certification request
+sed -i 's/# req_extensions = v3_req/req_extensions = v3_req/g' /etc/pki/tls/openssl.cnf
+sed -i 's/# Extensions to add to a certificate request/subjectAltName = @alt_names/g' /etc/pki/tls/openssl.cnf
+
+echo "[ alt_names ]
+DNS.1 = nexus.local.l-its.de
+# DNS.2 = test.de
+# DNS.3 = load-balanced-pkidemo.sironic.life
+IP.1 = 10.10.11.12
+# IP.2 = 10.10.60.3" >> /etc/pki/tls/openssl.cnf
+
+# generate certificate request
 mkdir /etc/nginx/private
-openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/nginx/private/cert.key -out /etc/nginx/private/cert.crt
+openssl req -new -newkey rsa:4096 -keyout /etc/nginx/private/cert.key -out /mnt/nexus.csr -nodes -subj "/C=DE/ST=NRW/L=DDorf/O=l-its home/OU=home server/CN=Nexus"
+# wait for the certificate
+while [ ! -f /mnt/nexus.crt ]; do sleep 1; done
+# copy the cert
+cp /mnt/nexus.crt /etc/nginx/private/cert.crt
+# remove old files
+rm -f /mnt/nexus.csr
+rm -f /mnt/nexus.crt
+umount /mnt
 
 # get config file
 curl https://raw.githubusercontent.com/MCWertGaming/server-tools/master/server/nexus-centos/nginx.conf > /etc/nginx/nginx.conf
