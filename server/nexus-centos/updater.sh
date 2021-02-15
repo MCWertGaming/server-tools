@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# update the system
+yum update -y
+
 ## update nexus
 # download release
 wget https://download.sonatype.com/nexus/3/latest-unix.tar.gz -O /opt/nexus.tar.gz
