@@ -114,8 +114,9 @@ crontab /opt/scripts/cron-reboot.job
 # mount nfs share for back-ups
 mkdir /opt/nexus_nfs
 echo "10.10.11.5:/mnt/nfs_share/nexus-backup /opt/nexus_nfs  nfs defaults 0 0" >> /etc/fstab
-chown -R nexus:nexus /opt/nexus3/nexus
-chown -R nexus:nexus /opt/nexus3/sonatype-work/
+mount 10.10.11.5:/mnt/nfs_share/nexus-backup /opt/nexus_nfs
+chown -R nexus:nexus /opt/nexus_nfs
+umount /opt/nexus_nfs
 
 # reboot to finish installation
 reboot
