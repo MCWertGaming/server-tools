@@ -89,9 +89,9 @@ sed -i 's/# req_extensions = v3_req/req_extensions = v3_req/g' /etc/pki/tls/open
 sed -i 's/# Extensions to add to a certificate request/subjectAltName = @alt_names/g' /etc/pki/tls/openssl.cnf
 
 echo "[ alt_names ]
-DNS.1 = nexus.local.l-its.de
+DNS.1 = nexus.l-its.de
 # DNS.2 = test.de
-# DNS.3 = load-balanced-pkidemo.sironic.life
+# DNS.3 = soos.de
 IP.1 = 10.10.11.12
 # IP.2 = 10.10.60.3" >> /etc/pki/tls/openssl.cnf
 
