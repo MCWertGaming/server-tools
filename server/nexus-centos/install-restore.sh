@@ -36,7 +36,7 @@ cp /mnt/nexus-backup.tar.zst nexus-backup.tar.zst
 # extract backup
 tar -I zstd -xvf nexus-backup.tar.zst
 # make a copy of the backup to avoid the old one to get overriden with wrong data
-rm -r /mnt/nexus-backup-last-restore-copy.tar.zst
+rm -f /mnt/nexus-backup-last-restore-copy.tar.zst
 cp nexus-backup.tar.zst /mnt/nexus-backup-last-restore-copy.tar.zst
 # remove backup
 rm -f nexus-backup.tar.zst
