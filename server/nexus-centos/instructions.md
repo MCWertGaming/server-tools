@@ -3,15 +3,15 @@
 New install with these commands:
 ```bash
 curl https://raw.githubusercontent.com/MCWertGaming/server-tools/master/server/nexus-centos/install-new.sh > install.sh
-sudo chmod +x install.sh
+chmod +x install.sh
 sudo ./install.sh
-sudo rm install.sh
+rm install.sh
 ```
 
 Restore a backup:
 ```bash
 curl https://raw.githubusercontent.com/MCWertGaming/server-tools/master/server/nexus-centos/install-restore.sh > install.sh
-sudo chmod +x install.sh
+chmod +x install.sh
 sudo ./install.sh
-sudo rm install.sh
+rm install.sh
 ```
