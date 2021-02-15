@@ -89,7 +89,7 @@ mkdir /etc/nginx/private
 openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/nginx/private/cert.key -out /etc/nginx/private/cert.crt
 
 # get config file
-curl https://raw.githubusercontent.com/MCWertGaming/server-tools/master/server/nexus-centos/ngingx.conf > /etc/nginx/nginx.conf
+curl https://raw.githubusercontent.com/MCWertGaming/server-tools/master/server/nexus-centos/nginx.conf > /etc/nginx/nginx.conf
 
 # allow https in firewall
 firewall-cmd --zone=public --permanent --add-service=http
@@ -98,3 +98,6 @@ firewall-cmd --zone=public --permanent --add-service=https
 firewall-cmd --reload
 # set selinx policy for nginx
 setsebool -P httpd_can_network_connect 1
+
+# reboot to finish installation
+reboot
