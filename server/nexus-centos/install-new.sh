@@ -106,7 +106,7 @@ mkdir /etc/nginx/private
 #rm -f /mnt/nexus.csr
 #rm -f /mnt/nexus.crt
 #umount /mnt
-openssl req -x509 -newkey rsa:4096 -keyout /etc/nginx/private/cert.key -out /etc/nginx/private/cert.crt -days 365 -subj "/C=DE/ST=NRW/L=DDorf/O=l-its home/OU=home server/CN=Nexus"
+openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/nginx/private/cert.key -out /etc/nginx/private/cert.crt -subj "/C=DE/ST=NRW/L=DDorf/O=l-its home/OU=home server/CN=Nexus"
 
 # get config file
 curl https://raw.githubusercontent.com/MCWertGaming/server-tools/master/server/nexus-centos/nginx.conf > /etc/nginx/nginx.conf
