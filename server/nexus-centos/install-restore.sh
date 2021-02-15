@@ -12,8 +12,8 @@ sudo nmcli con mod "eth0" ipv4.addresses "10.10.11.12/24" ipv4.gateway "10.10.11
 hostnamectl set-hostname nexus
 # update system and install required packages
 yum update -y
-yum -y install java-1.8.0-openjdk-headless wget yum-cron epel-release nfs-utils zstd
-yum install -y nginx
+yum -y install java-1.8.0-openjdk-headless wget yum-cron epel-release nfs-utils
+yum install -y nginx zstd
 
 ## install nexus
 # download release
