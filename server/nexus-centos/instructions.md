@@ -2,7 +2,7 @@
 
 install with these commands
 ```bash
-curl <url> > install.sh
+curl https://raw.githubusercontent.com/MCWertGaming/server-tools/master/server/nexus-centos/install.sh > install.sh
 sudo chmod +x install.sh
 sudo ./install.sh
 sudo rm install.sh
