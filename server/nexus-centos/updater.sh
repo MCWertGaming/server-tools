@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# stop on error
+set -e
+
 # update the system
 yum update -y
 

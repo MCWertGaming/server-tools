@@ -2,6 +2,9 @@
 
 ## back up task for nexus 3
 
+# stop on error
+set -e
+
 # stop nexus
 systemctl stop nexus.service
 
