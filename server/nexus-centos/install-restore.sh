@@ -50,7 +50,6 @@ echo 'run_as_user="nexus"' > /opt/nexus3/nexus/bin/nexus.rc
 sed -i 's/application-host=0.0.0.0/application-host=127.0.0.1/g' /opt/nexus3/nexus/etc/nexus-default.properties
 # manage filesystem permissions
 chown -R nexus:nexus /opt/nexus3/nexus
-chown -R nexus:nexus /opt/nexus3/sonatype-work/
 # set nofile limit for nexus user (required for nexus to operate)
 echo "nexus - nofile 65536" >> /etc/security/limits.conf
 # get updater sctipt
