@@ -11,11 +11,10 @@ cd /opt
 tar -xvzf nexus.tar.gz
 rm -f nexus.tar.gz
 # remove old release
-rm -rf /opt/nexus3/*
+rm -rf /opt/nexus3/nexus/
 # move new release
 mkdir nexus3/
-mv nexus-*/ nexus3/nexus
-mv sonatype-work/ nexus3/sonatype-work/
+mv nexus-*/ nexus3/nexus/
 # setup nexus config
 echo 'run_as_user="nexus"' > /opt/nexus3/nexus/bin/nexus.rc
 sed -i 's/application-host=0.0.0.0/application-host=127.0.0.1/g' /opt/nexus3/nexus/etc/nexus-default.properties

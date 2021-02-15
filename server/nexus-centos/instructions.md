@@ -1,8 +1,16 @@
 # Nexus repository manager 3 automated installation for CentOS 7
 
-install with these commands
+New install with these commands:
 ```bash
-curl https://raw.githubusercontent.com/MCWertGaming/server-tools/master/server/nexus-centos/install.sh > install.sh
+curl https://raw.githubusercontent.com/MCWertGaming/server-tools/master/server/nexus-centos/install-new.sh > install.sh
+sudo chmod +x install.sh
+sudo ./install.sh
+sudo rm install.sh
+```
+
+Restore a backup:
+```bash
+curl https://raw.githubusercontent.com/MCWertGaming/server-tools/master/server/nexus-centos/install-restore.sh > install.sh
 sudo chmod +x install.sh
 sudo ./install.sh
 sudo rm install.sh

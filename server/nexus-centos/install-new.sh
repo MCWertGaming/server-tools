@@ -12,7 +12,7 @@ sudo nmcli con mod "eth0" ipv4.addresses "10.10.11.12/24" ipv4.gateway "10.10.11
 hostnamectl set-hostname nexus
 # update system and install required packages
 yum update -y
-yum -y install java-1.8.0-openjdk-headless wget yum-cron epel-release
+yum -y install java-1.8.0-openjdk-headless wget yum-cron epel-release nfs-utils zstd
 yum install -y nginx
 
 ## install nexus
@@ -103,9 +103,19 @@ systemctl enable yum-cron
 sed -i 's/update_cmd = default/update_cmd = security/g' /etc/yum/yum-cron.conf
 sed -i 's/apply_updates = no/apply_updates = yes/g' /etc/yum/yum-cron.conf
 
-# create cron job to reboot on every monday at 2 am
-echo "0 2 * * mon root /sbin/reboot" > /opt/cron-reboot.job
-crontab /opt/cron-reboot.job
+# get backup script
+curl https://raw.githubusercontent.com/MCWertGaming/server-tools/master/server/nexus-centos/backup-task.sh > /opt/scripts/backup-task.sh
+chmod +x /opt/scripts/backup-task.sh
+
+# create cron job to backup, update and reboot on every monday at 2 am
+echo "0 2 * * mon root /opt/scripts/backup-task.sh" > /opt/scripts/cron-reboot.job
+crontab /opt/scripts/cron-reboot.job
+
+# mount nfs share for back-ups
+mkdir /opt/nexus_nfs
+echo "10.10.11.5:/mnt/nfs_share/nexus-backup /opt/nexus_nfs  nfs defaults 0 0" >> /etc/fstab
+chown -R nexus:nexus /opt/nexus3/nexus
+chown -R nexus:nexus /opt/nexus3/sonatype-work/
 
 # reboot to finish installation
 reboot
