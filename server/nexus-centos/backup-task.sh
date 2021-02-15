@@ -6,7 +6,8 @@
 systemctl stop nexus.service
 
 # create backup
-tar -I zstd -cvf /opt/nexus_nfs/nexus-backup.tar.zst /opt/nexus3/sonatype-work/
+cd /opt/nexus3/
+tar -I zstd -cvf /opt/nexus_nfs/nexus-backup.tar.zst sonatype-work/
 
 # update system
 yum update -y
