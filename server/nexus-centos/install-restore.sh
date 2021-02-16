@@ -107,10 +107,9 @@ sed -i 's/# Extensions to add to a certificate request/subjectAltName = @alt_nam
 
 echo "[ alt_names ]
 DNS.1 = nexus.l-its.de
-# DNS.2 = test.de
+DNS.2 = docker-registry.l-its.de
 # DNS.3 = soos.de
-IP.1 = 10.10.11.12
-# IP.2 = 10.10.60.3" >> /etc/pki/tls/openssl.cnf
+IP.1 = 10.10.11.12" >> /etc/pki/tls/openssl.cnf
 
 # generate certificate request
 mkdir /etc/nginx/private
