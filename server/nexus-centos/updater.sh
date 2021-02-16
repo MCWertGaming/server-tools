@@ -16,7 +16,6 @@ rm -f nexus.tar.gz
 # remove old release
 rm -rf /opt/nexus3/nexus/
 # move new release
-mkdir nexus3/
 mv nexus-*/ nexus3/nexus/
 # setup nexus config
 echo 'run_as_user="nexus"' > /opt/nexus3/nexus/bin/nexus.rc
