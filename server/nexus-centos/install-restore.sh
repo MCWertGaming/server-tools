@@ -129,7 +129,7 @@ curl https://raw.githubusercontent.com/MCWertGaming/server-tools/master/server/n
 firewall-cmd --zone=public --permanent --add-service=http
 firewall-cmd --zone=public --permanent --add-service=https
 # allow public interface port
-firewall-cmd --zone=public --permanent --add-port=5050
+firewall-cmd --zone=public --permanent --add-port=5050/tcp
 # reload firewalld
 firewall-cmd --reload
 # set selinx policy for nginx
