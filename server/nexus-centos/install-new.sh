@@ -97,16 +97,15 @@ IP.1 = 10.10.11.12
 
 # generate certificate request
 mkdir /etc/nginx/private
-#openssl req -new -newkey rsa:4096 -keyout /etc/nginx/private/cert.key -out /mnt/nexus.csr -nodes -subj "/C=DE/ST=NRW/L=DDorf/O=l-its home/OU=home server/CN=Nexus"
+openssl req -new -newkey rsa:4096 -keyout /etc/nginx/private/cert.key -out /mnt/nexus.csr -nodes -subj "/C=DE/ST=NRW/L=DDorf/O=l-its home/OU=home server/CN=Nexus"
 # wait for the certificate
-#while [ ! -f /mnt/nexus.crt ]; do sleep 1; done
+while [ ! -f /mnt/nexus.crt ]; do sleep 1; done
 # copy the cert
-#cp /mnt/nexus.crt /etc/nginx/private/cert.crt
+cp /mnt/nexus.crt /etc/nginx/private/cert.crt
 # remove old files
-#rm -f /mnt/nexus.csr
-#rm -f /mnt/nexus.crt
-#umount /mnt
-openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/nginx/private/cert.key -out /etc/nginx/private/cert.crt -subj "/C=DE/ST=NRW/L=DDorf/O=l-its home/OU=home server/CN=Nexus"
+rm -f /mnt/nexus.csr
+rm -f /mnt/nexus.crt
+umount /mnt
 
 # get config file
 curl https://raw.githubusercontent.com/MCWertGaming/server-tools/master/server/nexus-centos/nginx.conf > /etc/nginx/nginx.conf
