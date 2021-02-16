@@ -113,7 +113,7 @@ IP.1 = 10.10.11.12
 # IP.2 = 10.10.60.3" >> /etc/pki/tls/openssl.cnf
 
 # generate certificate request
-#mkdir /etc/nginx/private
+mkdir /etc/nginx/private
 #openssl req -new -newkey rsa:4096 -keyout /etc/nginx/private/cert.key -out /mnt/nexus.csr -nodes -subj "/C=DE/ST=NRW/L=DDorf/O=l-its home/OU=home server/CN=Nexus"
 # wait for the certificate
 #while [ ! -f /mnt/nexus.crt ]; do sleep 1; done
