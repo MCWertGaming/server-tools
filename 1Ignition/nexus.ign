@@ -1,0 +1,62 @@
+{
+  "ignition": {
+    "version": "3.2.0"
+  },
+  "passwd": {
+    "users": [
+      {
+        "groups": [
+          "wheel"
+        ],
+        "name": "mcwertgaming",
+        "sshAuthorizedKeys": [
+          "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCqXN6H2REjWYMSw3DQ0QkRiaD9Cuw1ZHW8mNaZkdCtfC6RWRnQU48aQio5el7oT43LLlEIIb2KwTJJxhIaLT5qutfST8A2AzLFC18jQ3OO6O6Xy/2BICy6CQJLqIi8qHOM6SQhLEEB+zBLrhAkQG3oBEYD4oURE96thDFpfsXlZHGsscwoMGOCdSy/snRrpeMgRb1kEn/1IFyVMEZAlOer3yHl2wiwNBX4Vwicz+RS9aHD+3+3PojI5o9kiyddFtYveDEQEYzjlokmN3lpwaESg9iZc3Brr3WmygES+jmIKwNJ61hXUPe0RgueDJbKAae4cWgaMDRtTUJcDB26jTaD3/Tiavb2P47yqsP8tdYsJYVny2HNJ+hI+9jfN97n/ucmcLSfL7v4FNgkTVxJE5MjpOOxVG0tbMxhoZ4ymTPm3FEzVatnqJxPEZx+E2jFvoYh9V+S80IlKRmujqOAlAEDGUG7mCwlEXKC+uqOEtNYJikIG0TUaMeZ39Mo/ZP20TM= mcwertgaming@archlinux"
+        ]
+      }
+    ]
+  },
+  "storage": {
+    "files": [
+      {
+        "path": "/etc/NetworkManager/system-connections/ens18.nmconnection",
+        "contents": {
+          "source": "data:,%5Bconnection%5D%0Aid%3Dens18%0Atype%3Dethernet%0Ainterface-name%3Dens18%0A%5Bipv4%5D%0Aaddress1%3D10.10.11.12%2F24%2C10.10.11.1%0Adns%3D192.168.1.10%3B%0Adns%3D192.168.1.99%3B%0Adns-search%3Dl-its.de%0Amay-fail%3Dfalse%0Amethod%3Dmanual%0A"
+        },
+        "mode": 384
+      },
+      {
+        "path": "/etc/hostname",
+        "contents": {
+          "source": "data:,nexus"
+        },
+        "mode": 420
+      },
+      {
+        "path": "/etc/zincati/config.d/51-rollout-wariness.toml",
+        "contents": {
+          "source": "data:,%5Bidentity%5D%0Arollout_wariness%20%3D%200.5%0A"
+        }
+      },
+      {
+        "path": "/etc/zincati/config.d/55-updates-strategy.toml",
+        "contents": {
+          "source": "data:;base64,W3VwZGF0ZXNdCnN0cmF0ZWd5ID0gInBlcmlvZGljIgpbW3VwZGF0ZXMucGVyaW9kaWMud2luZG93XV0KZGF5cyA9ICJNb24iCnN0YXJ0X3RpbWUgPSAiMDI6MDAiCmxlbmd0aF9taW51dGVzID0gNjAK"
+        }
+      }
+    ]
+  },
+  "systemd": {
+    "units": [
+      {
+        "contents": "[Unit]\nDescription=Bootupd automatic update\n\n[Service]\nExecStart=/usr/bin/bootupctl update\nRemainAfterExit=yes\n\n[Install]\nWantedBy=multi-user.target\n",
+        "enabled": true,
+        "name": "custom-bootupd-auto.service"
+      },
+      {
+        "contents": "[Unit]\nDescription=Nexus docker container service\nAfter=network-online.target\nWants=network-online.target\n\n[Service]\nExecStartPre=mkdir -p /var/lib/nexus\nExecStartPre=-/bin/podman kill nexus\nExecStartPre=-/bin/podman rm nexus\nExecStartPre=/bin/podman pull docker.io/sonatype/nexus3:latest\nExecStart=/bin/podman run --name nexus --volume /var/lib/nexus:/nexus-data:z --net=host docker.io/sonartype/nexus3:latest\n\nExecStop=/bin/podman stop --time 120 nexus\n\n[Install]\nWantedBy=timers.target\n",
+        "enabled": true,
+        "name": "nexus.service"
+      }
+    ]
+  }
+}
