@@ -112,7 +112,7 @@ curl https://raw.githubusercontent.com/MCWertGaming/server-tools/master/server/n
 firewall-cmd --zone=public --permanent --add-service=http
 firewall-cmd --zone=public --permanent --add-service=https
 # docker push ports
-sudo firewall-cmd --zone=public --add-port=9001-9050/tcp
+firewall-cmd --zone=public --add-port=9001-9050/tcp --permanent
 # reload firewalld
 firewall-cmd --reload
 # set selinx policy for nginx

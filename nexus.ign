@@ -1,0 +1,35 @@
+{
+  "ignition": {
+    "version": "3.2.0"
+  },
+  "passwd": {
+    "users": [
+      {
+        "name": "mcwertgaming",
+        "sshAuthorizedKeys": [
+          "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDOhsuRyY3y68zljOaO9Ox6PP+KuI4MSe4KFBWKGR5JMGT2pVzlVpIn3E48YfeytF9O9ovHPd9lw3jyKTCdJP7+VtJvhy6L4maW3J1bYgbBaBy1HGFSxvBX+o4FarhcCun9Yh6uQzvCGrcs8ZMrdIxCmth0iKm2QHGn7R2+Yw8l4TjykSHxS/CSSso/pRDvhdDE9wR0uHqua0yiapGVuNzXvAaDyrRZS0beH3MiFlJ0uuh5sfYGHRWRksv4TSZeSfHMI1OCzqrWQQBwTJgP+ixnwTR2InpO8bZPIMaATq97uUwrum4qN6ymbVl0McxhBdCbuNKdz4FucQ2fxJ9M87VjUgKwPE2i4KZRkJnMb1hMRS6Hqvl2vfzjOV5Fx10NAQU5cRgnefn2H/bgOxhpL/SlD9xikA51EpX+souyQyCT0aWNtrW4f6gLhHgRuHecTohjhyFbYtZeOEgceKpl2khsqNYhz8wdyYFdVOJmTMGwpIPIttdzDKLdRM+a9CCfVMs= mcwertgaming@archlinux"
+        ]
+      }
+    ]
+  },
+  "storage": {
+    "files": [
+      {
+        "path": "/etc/NetworkManager/system-connections/ens18.nmconnection",
+        "contents": {
+          "source": "data:,%5Bconnection%5D%0Aid%3Dens18%0Atype%3Dethernet%0Ainterface-name%3Dens18%0A%5Bipv4%5D%0Aaddress1%3D10.10.11.20%0Adns%3D192.168.1.10%2C192.168.1.99%3B%0Adns-search%3Dleven.dev%0Amay-fail%3Dfalse%0Amethod%3Dmanual%0A"
+        },
+        "mode": 384
+      }
+    ]
+  },
+  "systemd": {
+    "units": [
+      {
+        "contents": "[Unit]\nDescription=Nexus container service\nAfter=network-online.target\nWants=network-online.target\n\n[Service]\nTimeoutStartSec=0\nExecStartPre=-/bin/podman kill nexus\nExecStartPre=-/bin/podman rm nexus\nExecStartPre=/bin/podman pull sonartype/nexus3\nExecStart=/bin/podman -p 8081:8081 run --name nexus sonartype/nexus3\n\n[Install]\nWantedBy=multi-user.target\n",
+        "enabled": true,
+        "name": "nexus-container.service"
+      }
+    ]
+  }
+}

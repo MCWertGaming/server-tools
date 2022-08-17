@@ -108,6 +108,10 @@ sed -i 's/# Extensions to add to a certificate request/subjectAltName = @alt_nam
 echo "[ alt_names ]
 DNS.1 = nexus.l-its.de
 DNS.2 = docker-registry.l-its.de
+DNS.3 = external-docker-registy.l-its.de
+DNS.4 = arch-mirror.l-its.de
+DNS.5 = arch-repo.l-its.de
+DNS.6 = docker-push.l-its.de
 IP.1 = 10.10.11.12" >> /etc/pki/tls/openssl.cnf
 
 # generate certificate request
@@ -129,7 +133,7 @@ curl https://raw.githubusercontent.com/MCWertGaming/server-tools/master/server/n
 firewall-cmd --zone=public --permanent --add-service=http
 firewall-cmd --zone=public --permanent --add-service=https
 # docker push ports
-sudo firewall-cmd --zone=public --add-port=9001-9050/tcp
+firewall-cmd --zone=public --add-port=9001-9050/tcp --permanent
 # reload firewalld
 firewall-cmd --reload
 # set selinx policy for nginx

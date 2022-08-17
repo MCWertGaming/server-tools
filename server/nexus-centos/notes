@@ -1,0 +1,50 @@
+// addresses / ports
+8081 -> nexus.l-its.de
+8082 -> docker-registry.l-its.de
+8083 -> external-docker-registry.l-its.de
+8084 -> docker-push.l-its.de
+8094 -> arch-mirror.l-its.de
+8095 -> arch-repo.l-its.de
+
+// local ports
+8081 - nexus web
+8082 - local registry exposing
+8083 - external registry exposing
+
+//
+// docker push
+//
+// 9001 - 9050 allowed
+
+// 900X - base images
+9001 - archlinux-base
+9002 - docker-compose-base
+9003 - java-base
+9004 - minecraft-base
+9005 - go-base
+
+// 901X - docker compose
+9011 - devops-compose
+9012 - games-compose
+9013 - multimedia-compose
+
+// 902X - docker services
+9021 - gitea
+9022 - gocd-server
+9023 - gocd-runner
+9024 - watchtower
+9025 - portainer
+
+// 903X docker games
+9036 - minecraft-survival
+9037 - minecraft-modded
+9038 - velocity
+
+
+// docker containers external
+archlinux (dockerhub)
+UBI-minimal (RH-public)
+Rocket.chat (RH-private)
+grafana (RH-private)
+prometheus (RH-private)
+
